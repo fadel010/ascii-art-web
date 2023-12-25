@@ -1,0 +1,20 @@
+#command to build an image 
+docker build -t go-app .
+#command to list or images we have in this machine
+docker images
+#command to start a container
+docker run -it go-app sh
+#command to remove images
+docker image prune
+docker image rm go-app
+#command to remove containers
+docker container prune
+docker rm -f c1
+#command to lists the currently running containers and the stop ones
+docker ps -a
+#Executing commands in running containers
+docker run -it go-app sh
+#Stopping container
+docker stop c1
+#Starting container
+docker start c1

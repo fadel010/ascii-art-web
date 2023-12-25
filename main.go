@@ -6,17 +6,21 @@ import (
 	"net/http"
 )
 
+const port = ":8080"
+
 func main() {
 	// Register the handler function for the root route
-	http.HandleFunc("/", asciiart.HomePage)
-	http.HandleFunc("/asciiart", asciiart.Result)
+	http.HandleFunc("/", asciiart.HomeHandler)
+	http.HandleFunc("/ascii-art", asciiart.ResultHandler)
+	http.HandleFunc("/export", asciiart.ExportHandler)
 
-	// Serve static files (style.css)
-	http.Handle("/style.css", http.FileServer(http.Dir(".")))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	log.Println("listening...")
-	// Start the server on port 8080
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	// Start the server and handle errors
+	log.Println("Server listening on port", port)
+	log.Println("Access to the page on http://localhost" + port)
+	err := http.ListenAndServe(port, nil)
+	if err != nil {
 		log.Fatal("Error starting server:", err)
 	}
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII ART WEB</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title">ASCII Art Generator</h1>
+
+        <form method="post" action="/ascii-art" class="form">
+            <label for="inputText" class="form-label">Enter Your Text</label>
+            <textarea class="form-control input-text" name="string" id="inputText" placeholder="Type Something" required></textarea>
+
+            <label for="selectBanner" class="form-label">Select Banner</label>
+            <select class="form-select select-banner" name="banner" id="selectBanner">
+                <option value="standard">Standard</option>
+                <option value="shadow">Shadow</option>
+                <option value="thinkertoy">Thinkertoy</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary submit-button">Generate ASCII Art</button>
+        </form>
+
+        <div class="output-container">
+            {{if .Output}}
+                <pre class="output-text">{{.Output}}</pre>
+                <a href="/export" class="btn btn-success download-button" download="asciiart.txt">Download ASCII Art</a>
+            {{end}}
+        </div>
+    </div>
+
+</body>
+</html>
